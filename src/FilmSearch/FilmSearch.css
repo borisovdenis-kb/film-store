@@ -1,0 +1,56 @@
+.film-search {
+    display: flex;
+    width: 610px;
+    height: 40px;
+    margin-right: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.film-search__input-container {
+    display: flex;
+    align-items: center;
+    width: 610px;
+    height: 100%;
+    background-color: #30343d;
+}
+
+.film-search__input-container--active {
+    background-color: #383c46;
+}
+
+.film-search__input {
+    width: 100%;
+    padding-left: 20px;
+    background-color: rgba(226,236,255,0);
+    font-size: 15px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+}
+
+.film-search__clear-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+.film-search__clear {
+    cursor: pointer;
+}
+
+.film-search__clear:hover {
+    color: #ffffff;
+}
+
+.film-search__toolbar-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #30343d;
+    cursor: pointer;
+}

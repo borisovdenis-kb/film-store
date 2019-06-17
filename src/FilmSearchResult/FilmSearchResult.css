@@ -1,0 +1,15 @@
+.film-search-result {
+    width: 1060px;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.film-search-result__film-row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.film-search-result__film-card-container {
+    margin-right: 20px;
+}

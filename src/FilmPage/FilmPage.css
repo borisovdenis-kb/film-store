@@ -1,0 +1,59 @@
+.film-page {
+    width: 1060px;
+    height: 100%;
+    background-color: #282c34;
+}
+
+.film-page__title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding-left: 20px;
+    background-color: #30343d;
+    color: #b4b4b4;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.film-page__description-container {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    color: #b4b4b4;
+}
+
+.film-page__full-info {
+    width: 500px;
+    margin-left: 20px;
+}
+
+.film-page__actor-list {
+    flex: 1 auto;
+    margin-left: 20px;
+}
+
+.film-page__poster-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.film-page__sale-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+.film-page__film-preview-container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.film-page__similar-films {
+    width: 100%;
+    padding: 20px;
+    background-color: #1a1c22;
+}

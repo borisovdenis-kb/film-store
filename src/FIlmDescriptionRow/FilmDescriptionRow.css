@@ -1,0 +1,20 @@
+.film-description-row {
+    display: flex;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(195,199,207,0.44);
+}
+
+.film-description-row__property-name {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 150px;
+}
+
+.film-description-row__property-value {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1 auto;
+    text-align: left;
+}

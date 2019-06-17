@@ -1,0 +1,27 @@
+.film-card {
+
+}
+
+.film-card__poster {
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.film-card__short-info {
+    margin-top: 5px;
+    color: #b4b4b4;
+}
+
+.film-card__title {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-weight: 600;
+    text-align: left;
+}
+
+.film-card__extra-info {
+    display: flex;
+    justify-content: flex-start;
+}

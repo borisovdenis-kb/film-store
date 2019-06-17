@@ -1,0 +1,48 @@
+.carousel {
+    display: flex;
+}
+
+.carousel__content {
+    display: flex;
+    overflow: hidden;
+}
+
+.carousel__content--movable {
+    display: flex;
+    background-color: brown;
+    transform: translateX(100px);
+    transition: 0.3s ease-in-out;
+}
+
+.carousel__btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    background-color: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.carousel__btn {
+    width: 25px;
+    height: 25px;
+    border-right: 2px solid #9b9b9b;
+    border-bottom: 2px solid #9b9b9b;
+    transition: 0.3s ease-in-out;
+}
+
+.carousel__btn-container:hover .carousel__btn {
+    border-right: 2px solid #dcdcdc;
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.carousel__btn--back {
+    margin-left: 15px;
+    transform: rotate(135deg);
+}
+
+.carousel__btn--forward {
+    margin-right: 15px;
+    transform: rotate(-45deg);
+}
