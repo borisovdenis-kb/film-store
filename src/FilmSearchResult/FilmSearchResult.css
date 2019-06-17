@@ -4,12 +4,12 @@
     padding-top: 20px;
 }
 
-.film-search-result__film-row {
+.film-search-result__row {
     padding-top: 10px;
     padding-bottom: 10px;
     display: flex;
 }
 
-.film-search-result__film-card-container {
+.film-search-result__card-container {
     margin-right: 20px;
 }

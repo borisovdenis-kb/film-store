@@ -10,7 +10,13 @@ const getFilmById = (id) => {
     .then(response => response.json());
 };
 
+const getFilmByGenre = (genre) => {
+  return fetch(`${URL}/films/?genres_like=${genre}`)
+    .then(response => response.json());
+};
+
 export {
   getFilms,
-  getFilmById
+  getFilmById,
+  getFilmByGenre
 };

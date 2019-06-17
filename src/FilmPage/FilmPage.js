@@ -5,7 +5,7 @@ import FilmActorList from "../FilmActorList/FilmActorList";
 import Button from "../Button/Button";
 import Carousel from "../Carousel/Carousel";
 import _ from 'lodash';
-import { getFilms, getFilmById } from "../services/FilmApi";
+import { getFilms, getFilmById, getFilmByGenre } from "../services/FilmApi";
 import './FilmPage.css';
 import FilmPreview from "../FilmPreview/FilmPreview";
 
@@ -19,6 +19,38 @@ export default class FilmPage extends React.Component {
     };
   }
 
+  loadFilmData = () => {
+    const filmId = this.props.match.params.id;
+
+    return getFilmById(filmId)
+      .then(result => {
+        this.setState({filmData: result});
+
+        return this.loadSimilarFilms();
+      })
+
+  };
+
+  loadSimilarFilms = () => {
+    const promises = this.state.filmData.genres
+      .map(genre => getFilmByGenre(genre));
+
+    return Promise.all(promises)
+      .then(responses => {
+        let result = _.unionBy(...responses, 'id');
+        result = _.pullAllBy(result, [this.state.filmData], 'id');
+
+        this.setState({
+          similarFilms: result
+        });
+      });
+  };
+
+  openFilmPage = (filmId) => {
+    this.props.history.push(`/films/${filmId}`);
+    window.location.reload();
+  };
+
   prepareActorList = actorList => {
     if (!actorList) {
       return [];
@@ -28,17 +60,7 @@ export default class FilmPage extends React.Component {
   };
 
   componentDidMount() {
-    const filmId = this.props.match.params.id;
-
-    getFilmById(filmId)
-      .then(result => {
-        this.setState({filmData: result});
-
-        return getFilms();
-      })
-      .then(result => {
-        this.setState({similarFilms: result});
-      });
+    this.loadFilmData();
   }
 
   render() {
@@ -74,10 +96,13 @@ export default class FilmPage extends React.Component {
 
         {this.state.similarFilms.length && (
           <div className="film-page__similar-films">
+            <div className="film-page__similar-films-header">
+              Similar Films
+            </div>
             <Carousel itemWidth="180" itemHeight="270" visibleAmount={5}>
               {this.state.similarFilms.map(film => (
                 <div className="film-page__film-preview-container" key={film.id}>
-                  <FilmPreview {...film}/>
+                  <FilmPreview {...film} onClick={this.openFilmPage}/>
                 </div>
               ))}
             </Carousel>

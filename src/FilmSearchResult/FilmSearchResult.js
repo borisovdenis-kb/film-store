@@ -28,9 +28,9 @@ export default class FilmSearchResult extends React.Component {
     return (
       <div className="film-search-result">
         {this.state.films.map((row, index) => (
-          <div className="film-search-result__film-row" key={index}>
+          <div className="film-search-result__row" key={index}>
             {row.map(film => (
-              <div className="film-search-result__film-card-container" key={film.id}>
+              <div className="film-search-result__card-container" key={film.id}>
                 <FilmPreview {...film} onClick={this.openFilmPage}/>
               </div>
             ))}

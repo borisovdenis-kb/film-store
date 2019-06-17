@@ -1,5 +1,6 @@
 .carousel {
     display: flex;
+    width: 100%;
 }
 
 .carousel__content {
@@ -9,12 +10,12 @@
 
 .carousel__content--movable {
     display: flex;
-    background-color: brown;
     transform: translateX(100px);
     transition: 0.3s ease-in-out;
 }
 
 .carousel__btn-container {
+    flex: 1 auto;
     display: flex;
     justify-content: center;
     align-items: center;
