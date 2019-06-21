@@ -94,7 +94,7 @@ export default class FilmPage extends React.Component {
           </div>
         </div>
 
-        {this.state.similarFilms.length && (
+        {Boolean(this.state.similarFilms.length) && (
           <div className="film-page__similar-films">
             <div className="film-page__similar-films-header">
               Similar Films

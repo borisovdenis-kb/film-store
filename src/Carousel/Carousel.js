@@ -1,76 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Carousel.css';
 
-export default class Carousel extends React.Component { // HOC ?
-  constructor(props) {
-    super(props);
+export default function Carousel(props) {
+  const [offsetIndex, setOffsetIndex] = useState(0);
 
-    this.state = {
-      offsetIndex: 0
+  function goForward() {
+    if (!isForwardDisabled()) {
+      setOffsetIndex(offsetIndex - 1);
     }
   }
 
-  goForward = () => {
-    if (!this.isForwardDisabled()) {
-      this.setState(prevState => ({offsetIndex: prevState.offsetIndex - 1}));
+  function goBack() {
+    if (!isBackDisabled()) {
+      setOffsetIndex(offsetIndex + 1);
     }
-  };
+  }
 
-  goBack = () => {
-    if (!this.isBackDisabled()) {
-      this.setState(prevState => ({offsetIndex: prevState.offsetIndex + 1}));
-    }
-  };
+  function isForwardDisabled() {
+    const {visibleAmount} = props;
 
-  isForwardDisabled = () => {
-    const {visibleAmount} = this.props;
+    return offsetIndex === (props.children.length - visibleAmount) * -1;
+  }
 
-    return this.state.offsetIndex === (this.props.children.length - visibleAmount) * -1;
-  };
+  function isBackDisabled() {
+    return offsetIndex === 0;
+  }
 
-  isBackDisabled = () => {
-    return this.state.offsetIndex === 0;
-  };
-
-  getCarouselContentStyle = () => {
-    const {itemWidth, itemHeight, visibleAmount} = this.props;
+  function getCarouselContentStyle() {
+    const {itemWidth, itemHeight, visibleAmount} = props;
     const carouselContentWidth = itemWidth * visibleAmount;
 
     return {
       width: `${carouselContentWidth || 500}px`,
       height: `${itemHeight || 100}px`
     };
-  };
+  }
 
-  getCarouselMovableStyle = () => {
-    const {itemWidth} = this.props;
+  function getCarouselMovableStyle() {
+    const {itemWidth} = props;
 
     return {
-      transform: `translateX(${itemWidth * this.state.offsetIndex}px)`
+      transform: `translateX(${itemWidth * offsetIndex}px)`
     };
-  };
+  }
 
-  render() {
-    // если итоговое кол-во item <= чем visibleAmount, то не отображать кнопки назад/вперед
-
-    return (
-      <div className="carousel">
-        <div className="carousel__btn-container" onClick={this.goBack}>
-          {!this.isBackDisabled()
-            && <div className="carousel__btn carousel__btn--back"></div>
-          }
-        </div>
-        <div className="carousel__content" style={this.getCarouselContentStyle()}>
-          <div className="carousel__content--movable" style={this.getCarouselMovableStyle()}>
-            {this.props.children}
-          </div>
-        </div>
-        <div className="carousel__btn-container" onClick={this.goForward}>
-          {!this.isForwardDisabled()
-            && <div className="carousel__btn carousel__btn--forward"></div>
-          }
+  return (
+    <div className="carousel">
+      <div className="carousel__btn-container" onClick={goBack}>
+        {!isBackDisabled()
+        && <div className="carousel__btn carousel__btn--back"/>
+        }
+      </div>
+      <div className="carousel__content" style={getCarouselContentStyle()}>
+        <div className="carousel__content--movable" style={getCarouselMovableStyle()}>
+          {props.children}
         </div>
       </div>
-    );
-  }
+      <div className="carousel__btn-container" onClick={goForward}>
+        {!isForwardDisabled()
+        && <div className="carousel__btn carousel__btn--forward"/>
+        }
+      </div>
+    </div>
+  );
 }
