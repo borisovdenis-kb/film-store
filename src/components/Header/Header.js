@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from './../Logo/Logo';
+import Logo from '../Logo/Logo';
 import FilmSearch from '../FilmSearch/FilmSearch';
 import './Header.css';
 

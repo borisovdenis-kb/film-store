@@ -1,5 +1,11 @@
 import React from 'react';
+import SearchButton from "../SearchButton/SearchButton";
+import { icons } from "../../constants/icons";
+import { getFilms } from "../../services/FilmApi";
+import { store } from "../../store";
+import { setFilms } from "../../store/actions";
 import './FilmSearch.css';
+
 
 const classNames = require('classnames');
 
@@ -11,6 +17,13 @@ export default class FilmSearch extends React.Component {
       value: '',
       isFocused: false
     };
+  }
+
+  componentDidMount() {
+    getFilms()
+      .then(result => {
+        store.dispatch(setFilms(result));
+      });
   }
 
   onChange = (e) => {
@@ -47,12 +60,8 @@ export default class FilmSearch extends React.Component {
              {this.state.value && <div className="film-search__clear" onClick={this.onClearValueClick}>✖</div>}
            </div>
         </div>
-        <div className="film-search__toolbar-button">
-          F
-        </div>
-        <div className="film-search__toolbar-button">
-          S
-        </div>
+        <SearchButton icon={icons.searchFilter}/>
+        <SearchButton icon={icons.search}/>
       </div>
     );
   }

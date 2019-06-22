@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilmPreview.css';
-import FilmPoster from "../FilmPoster/FilmPoster";
+import FilmPoster from '../FilmPoster/FilmPoster';
 
 export default class FilmPreview extends React.Component {
   openFilmPage = () => {

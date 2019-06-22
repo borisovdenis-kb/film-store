@@ -1,7 +1,16 @@
 const URL = 'http://localhost:3004';
 
-const getFilms = () => {
-  return fetch(`${URL}/films`)
+const getFilms = (params = {}) => {
+  let url = `${URL}/films`;
+  const urlQuery = Object.entries(params).map(item => {
+    const [value, key] = item;
+
+    return `${key}=${value}`;
+  }).join('&');
+
+  url = `${url}${urlQuery ? '?' : ''}${urlQuery}`;
+
+  return fetch(url)
     .then(response => response.json());
 };
 

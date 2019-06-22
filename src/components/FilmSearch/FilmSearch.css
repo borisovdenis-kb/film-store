@@ -44,13 +44,3 @@
 .film-search__clear:hover {
     color: #ffffff;
 }
-
-.film-search__toolbar-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background-color: #30343d;
-    cursor: pointer;
-}

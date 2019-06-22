@@ -1,0 +1,18 @@
+.search-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #30343d;
+    cursor: pointer;
+}
+
+.search-button__img {
+    width: 80%;
+    height: 80%;
+}
+
+.search-button:hover .search-button {
+    filter: invert(50%);
+}

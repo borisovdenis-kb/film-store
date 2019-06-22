@@ -5,7 +5,7 @@ import FilmActorList from "../FilmActorList/FilmActorList";
 import Button from "../Button/Button";
 import Carousel from "../Carousel/Carousel";
 import _ from 'lodash';
-import { getFilms, getFilmById, getFilmByGenre } from "../services/FilmApi";
+import { getFilms, getFilmById, getFilmByGenre } from "../../services/FilmApi";
 import './FilmPage.css';
 import FilmPreview from "../FilmPreview/FilmPreview";
 
