@@ -2,14 +2,13 @@ import React from 'react';
 import SearchButton from "../SearchButton/SearchButton";
 import { icons } from "../../constants/icons";
 import { getFilms } from "../../services/FilmApi";
-import { store } from "../../store";
-import { setFilms } from "../../store/actions";
+import {store, toggleFilter, setFilms} from "../../store";
 import './FilmSearch.css';
-
+import {connect} from "react-redux";
 
 const classNames = require('classnames');
 
-export default class FilmSearch extends React.Component {
+export default class FilmSearchUI extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +41,10 @@ export default class FilmSearch extends React.Component {
     this.setState({value: ''});
   };
 
+  toggleFilter = () => {
+    this.props.dispatch(toggleFilter());
+  };
+
   render() {
     const filmSearchInputClass = classNames({
       'film-search__input-container': true,
@@ -60,9 +63,11 @@ export default class FilmSearch extends React.Component {
              {this.state.value && <div className="film-search__clear" onClick={this.onClearValueClick}>✖</div>}
            </div>
         </div>
-        <SearchButton icon={icons.searchFilter}/>
+        <SearchButton icon={icons.searchFilter} onClick={this.toggleFilter}/>
         <SearchButton icon={icons.search}/>
       </div>
     );
   }
 }
+
+export const FilmSearch = connect()(FilmSearchUI);

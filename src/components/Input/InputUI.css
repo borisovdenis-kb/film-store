@@ -1,0 +1,23 @@
+.input-ui {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.input-ui__input {
+    width: 100%;
+    height: 25px;
+    padding-left: 10px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    background-color: #30343d;
+    color: #dcdcdc;
+}
+
+.input-ui__label {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 5px;
+    color: #2b8eb2
+}

@@ -1,11 +1,11 @@
-const SET_FILMS = 'SET_FILMS';
+export const SET_FILMS = 'SET_FILMS';
+export const TOGGLE_FILTER = 'TOGGLE_FILTER';
 
-const setFilms = films => ({
+export const setFilms = films => ({
   type: SET_FILMS,
   films
 });
 
-export {
-  SET_FILMS,
-  setFilms
-}
+export const toggleFilter = () => ({
+  type: TOGGLE_FILTER,
+});

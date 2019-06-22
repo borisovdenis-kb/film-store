@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import FilmSearchResult from './components/FilmSearchResult/FilmSearchResult';
 import FilmPage from './components/FilmPage/FilmPage';
+import {FilmSearchResult} from "./components/FilmSearchResult/FilmSearchResult";
 import {Route, Switch} from 'react-router-dom';
+import {Header} from "./components/Header/Heder";
 import {withRouter} from "react-router-dom";
 import './App.css';
 
