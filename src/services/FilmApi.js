@@ -1,31 +1,21 @@
-const URL = 'http://localhost:3004';
+import { ApiCreator } from "./api";
 
-const getFilms = (params = {}) => {
-  let url = `${URL}/films`;
-  const urlQuery = Object.entries(params).map(item => {
-    const [value, key] = item;
+const apiCreator = new ApiCreator(URL);
 
-    return `${key}=${value}`;
-  }).join('&');
-
-  url = `${url}${urlQuery ? '?' : ''}${urlQuery}`;
-
-  return fetch(url)
-    .then(response => response.json());
+const getFilms = ({params = {}} = {}) => {
+  return apiCreator.get('/films')(params);
 };
 
 const getFilmById = (id) => {
-  return fetch(`${URL}/films/${id}`)
-    .then(response => response.json());
+  return apiCreator.get('/films/:id')({id});
 };
 
-const getFilmByGenre = (genre) => {
-  return fetch(`${URL}/films/?genres_like=${genre}`)
-    .then(response => response.json());
+const getFilmByFilter = ({params = {}} = {}) => {
+  return apiCreator.get('/films')(params);
 };
 
 export {
   getFilms,
   getFilmById,
-  getFilmByGenre
+  getFilmByFilter
 };

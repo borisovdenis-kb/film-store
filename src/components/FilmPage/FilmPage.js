@@ -5,7 +5,7 @@ import FilmActorList from "../FilmActorList/FilmActorList";
 import Button from "../Button/Button";
 import Carousel from "../Carousel/Carousel";
 import _ from 'lodash';
-import { getFilms, getFilmById, getFilmByGenre } from "../../services/FilmApi";
+import { getFilms, getFilmById, getFilmByFilter } from "../../services/FilmApi";
 import './FilmPage.css';
 import FilmPreview from "../FilmPreview/FilmPreview";
 
@@ -33,7 +33,11 @@ export default class FilmPage extends React.Component {
 
   loadSimilarFilms = () => {
     const promises = this.state.filmData.genres
-      .map(genre => getFilmByGenre(genre));
+      .map(genre => getFilmByFilter({
+        params: {
+          genres_like: genre
+        }
+      }));
 
     return Promise.all(promises)
       .then(responses => {

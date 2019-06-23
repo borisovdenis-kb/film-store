@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 import {FilmSearch} from "../FilmSearch/FilmSearch";
-import FilmSearchFilter from '../FilmSearchFilter/FilmSearchFilter';
+import { FilmSearchFilter } from "../FilmSearchFilter/FilmSearchFilter";
 import './Header.css';
 
 export default class HeaderUI extends  React.Component {

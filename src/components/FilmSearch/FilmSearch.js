@@ -5,10 +5,11 @@ import { getFilms } from "../../services/FilmApi";
 import {store, toggleFilter, setFilms} from "../../store";
 import './FilmSearch.css';
 import {connect} from "react-redux";
+import _ from 'lodash';
 
 const classNames = require('classnames');
 
-export default class FilmSearchUI extends React.Component {
+class FilmSearchUI extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,6 +24,12 @@ export default class FilmSearchUI extends React.Component {
       .then(result => {
         store.dispatch(setFilms(result));
       });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!_.isEqual(prevProps.filter, this.props.filter)) {
+      getFilms({params: this.props.filter});
+    }
   }
 
   onChange = (e) => {
