@@ -8,7 +8,7 @@ import './Header.css';
 
 class HeaderUI extends  React.Component {
   onLogoClick = () => {
-    this.props.history.push('/');
+    this.props.history.push('/films');
   };
 
   render() {

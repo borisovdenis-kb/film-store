@@ -9,10 +9,16 @@ function HomeUI(props) {
   };
 
   return (
-    <div className="home" onClick={openFilter}>
-      <div className="home__open-filter">Search Your Film</div>
+    <div className="home">
+      {!props.isFilterVisible &&
+        <div className="home__open-filter" onClick={openFilter}>{!props.isFilterVisible && 'Search Your Films'}</div>
+      }
     </div>
   );
 }
 
-export const Home = connect()(HomeUI);
+export const Home = connect(
+  (state) => ({
+    isFilterVisible: state.isFilterVisible
+  })
+)(HomeUI);

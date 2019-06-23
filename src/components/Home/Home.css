@@ -8,3 +8,7 @@
     cursor: pointer;
     color: #64676e;
 }
+
+.home__open-filter:hover {
+    color: #2b8eb2;
+}
