@@ -6,6 +6,8 @@ import {setFilms, setFilter} from "../../store";
 import './FilmSearchFilter.css';
 import {getFilms} from "../../services/FilmApi";
 import {withRouter} from "react-router-dom";
+import {PeriodUI} from "../Period/PeriodUI";
+import {store} from "../../store";
 
 class FilmSearchFilterUI extends React.Component {
   constructor(props) {
@@ -15,7 +17,10 @@ class FilmSearchFilterUI extends React.Component {
       filter: {
         director: '',
         rating: '',
-        year: ''
+        year: {
+          start: '',
+          end: ''
+        }
       }
     }; // TODO: теперь вопрос как этот правильно синхронизировать со стором
   }
@@ -35,6 +40,17 @@ class FilmSearchFilterUI extends React.Component {
     });
   };
 
+  onPeriodsChange = ({name, start, end}) => {
+    this.setState((state) => {
+      return {
+        filter: {
+          ...state.filter,
+          [name]: {start, end}
+        }
+      };
+    });
+  };
+
   onFilterClick = () => {
     this.props.setFilter(this.state.filter);
 
@@ -42,12 +58,15 @@ class FilmSearchFilterUI extends React.Component {
   };
 
   applyFilter() {
-    const {filter} = this.props;
+    const {filter} = store.getState();
     const params = {
       director_like: filter.director,
-      year_gte: filter.year,
+      year_gte: filter.year.start,
+      year_lte: filter.year.end,
       rating_gte: filter.rating
     };
+
+    console.log(params);
 
     getFilms(params)
       .then(result => {
@@ -62,23 +81,24 @@ class FilmSearchFilterUI extends React.Component {
       <div className="film-search-filter">
         <div className="film-search-filter__inputs">
           <div className="film-search-filter__input">
-            <InputUI label="lowest rating"
+            <InputUI label="Lowest rating"
                      name="rating"
+                     placeholder="rating"
                      value={this.state.filter.rating}
                      onChange={this.onInputsChange}
             />
           </div>
           <div className="film-search-filter__input">
-            <InputUI className="film-search-filter__input"
-                     label="start year"
-                     name="year"
-                     value={this.state.filter.year}
-                     onChange={this.onInputsChange}
+            <PeriodUI label="Years period"
+                      name="year"
+                      start={this.state.filter.year.start}
+                      end={this.state.filter.year.end}
+                      onChange={this.onPeriodsChange}
             />
           </div>
-          <InputUI className="film-search-filter__input"
-                   label="director"
+          <InputUI label="Director"
                    name="director"
+                   placeholder="Director"
                    value={this.state.filter.director}
                    onChange={this.onInputsChange}
           />

@@ -3,19 +3,23 @@ import './InputUI.css';
 
 export class InputUI extends React.Component {
   render() {
-    const {value, name, label, onChange} = this.props;
+    const styles = {
+      width: `${this.props.width || 200}px`
+    };
 
     return (
       <div className="input-ui">
         <input className="input-ui__input"
+               style={styles}
                type="text"
-               name={name}
-               onChange={onChange}
-               value={value}
+               name={this.props.name}
+               placeholder={this.props.placeholder}
+               onChange={this.props.onChange}
+               value={this.props.value}
         />
-        <div className="input-ui__label">
-          {label}
-        </div>
+        {this.props.label
+          && <div className="label-ui">{this.props.label}</div>
+        }
       </div>
     );
   }

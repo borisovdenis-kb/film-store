@@ -1,0 +1,18 @@
+.period {
+    display: flex;
+    flex-direction: column;
+}
+
+.period__inputs {
+    display: flex;
+}
+
+.period__input {
+    margin-right: 10px;
+}
+
+.period__label {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}

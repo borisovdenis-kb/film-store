@@ -2,7 +2,10 @@ import { SET_FILTER_VISIBILITY, SET_FILTER } from "../actions";
 
 const defaultFilter = {
   director: '',
-  year: '',
+  year: {
+    start: '',
+    end: ''
+  },
   rating: ''
 };
 

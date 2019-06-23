@@ -10,6 +10,26 @@ export class ApiCreator {
     this.rootUrl = URL;
   }
 
+  /**
+   * To get resource
+   * Usage:
+   *     apiCreator.get('/films/:id')({id: 777})
+   *     -
+   *     -> makes HTTP request
+   *     -> host:port/films/777
+   *
+   *     apiCreator.get('/films')({
+   *         genres_like: 'Comedy',
+   *         year_gte: 1920,
+   *         year_lte: 1980
+   *     })
+   *     -
+   *     -> makes HTTP request
+   *     host:port/films?genres_like=Comedy&year_gte=1920&year_lte=1980
+   *
+   * @param {String} url - resource url
+   * @returns {function(*=): Promise<any | never>}
+   */
   get(url) {
     return (params) => {
       url = this.getUrlPreparedUrl(url, params);
@@ -29,11 +49,14 @@ export class ApiCreator {
   }
 
   setUrlQuery(url, params) {
-    const result = Object.entries(params).map(item => {
-      const [key, value] = item;
+    const result = Object.entries(params)
+      .filter(item => Boolean(item[1]))
+      .map(item => {
+        const [key, value] = item;
 
-      return value ? `${key}=${value}`: '';
-    }).join('&');
+        return value ? `${key}=${value}`: '';
+      })
+      .join('&');
 
     return `${url}${result && '?' + result}`;
   }

@@ -1,0 +1,6 @@
+.label-ui {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 5px;
+    color: #2b8eb2
+}
