@@ -16,7 +16,10 @@ class FilmSearchFilterUI extends React.Component {
     this.state = {
       filter: {
         director: '',
-        rating: '',
+        rating: {
+          start: '',
+          end: ''
+        },
         year: {
           start: '',
           end: ''
@@ -59,12 +62,7 @@ class FilmSearchFilterUI extends React.Component {
 
   applyFilter() {
     const {filter} = store.getState();
-    const params = {
-      director_like: filter.director,
-      year_gte: filter.year.start,
-      year_lte: filter.year.end,
-      rating_gte: filter.rating
-    };
+    const params = this.mapFilterToParams(filter);
 
     console.log(params);
 
@@ -76,16 +74,24 @@ class FilmSearchFilterUI extends React.Component {
       });
   }
 
+  mapFilterToParams = (filter) => ({
+    director_like: filter.director,
+    year_gte: filter.year.start,
+    year_lte: filter.year.end,
+    rating_gte: filter.rating.start,
+    rating_lte: filter.rating.end
+  });
+
   render() {
     return (
       <div className="film-search-filter">
         <div className="film-search-filter__inputs">
           <div className="film-search-filter__input">
-            <InputUI label="Lowest rating"
-                     name="rating"
-                     placeholder="rating"
-                     value={this.state.filter.rating}
-                     onChange={this.onInputsChange}
+            <PeriodUI label="Rating"
+                      name="rating"
+                      start={this.state.filter.rating.start}
+                      end={this.state.filter.rating.end}
+                      onChange={this.onPeriodsChange}
             />
           </div>
           <div className="film-search-filter__input">

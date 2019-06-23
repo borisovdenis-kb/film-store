@@ -6,7 +6,10 @@ const defaultFilter = {
     start: '',
     end: ''
   },
-  rating: ''
+  rating: {
+    start: '',
+    end: ''
+  }
 };
 
 export const filter = (state = defaultFilter, action) => {
