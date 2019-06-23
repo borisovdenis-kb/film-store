@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from "../Button/Button";
+import Button from "../primitives/Button/Button";
 import {connect} from 'react-redux';
-import {InputUI} from "../Input/InputUI";
+import {InputUI} from "../primitives/Input/InputUI";
 import {setFilms, setFilter} from "../../store";
 import './FilmSearchFilter.css';
 import {getFilms} from "../../services/FilmApi";
 import {withRouter} from "react-router-dom";
-import {PeriodUI} from "../Period/PeriodUI";
+import {PeriodUI} from "../primitives/Period/PeriodUI";
 import {store} from "../../store";
 
 class FilmSearchFilterUI extends React.Component {

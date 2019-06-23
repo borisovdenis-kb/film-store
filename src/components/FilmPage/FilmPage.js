@@ -2,7 +2,7 @@ import React from 'react';
 import FilmPoster from "../FilmPoster/FilmPoster";
 import FilmDescriptionRow from "../FIlmDescriptionRow/FilmDescriptionRow";
 import FilmActorList from "../FilmActorList/FilmActorList";
-import Button from "../Button/Button";
+import Button from "../primitives/Button/Button";
 import Carousel from "../Carousel/Carousel";
 import _ from 'lodash';
 import { getFilms, getFilmById, getFilmByFilter } from "../../services/FilmApi";
