@@ -30,7 +30,9 @@ export class ApiCreator {
 
   setUrlQuery(url, params) {
     const result = Object.entries(params).map(item => {
-      return `${item[0]}=${item[1]}`;
+      const [key, value] = item;
+
+      return value ? `${key}=${value}`: '';
     }).join('&');
 
     return `${url}${result && '?' + result}`;

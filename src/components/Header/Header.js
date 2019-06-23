@@ -1,10 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import Logo from '../Logo/Logo';
 import {FilmSearch} from "../FilmSearch/FilmSearch";
 import { FilmSearchFilter } from "../FilmSearchFilter/FilmSearchFilter";
+import { withRouter } from "react-router-dom";
 import './Header.css';
 
-export default class HeaderUI extends  React.Component {
+class HeaderUI extends  React.Component {
   onLogoClick = () => {
     this.props.history.push('/');
   };
@@ -20,7 +22,7 @@ export default class HeaderUI extends  React.Component {
             <FilmSearch/>
           </div>
         </div>
-        {this.props.isVisible &&
+        {this.props.isFilterVisible &&
           <div className="header__filter-container">
             <FilmSearchFilter />
           </div>
@@ -29,3 +31,11 @@ export default class HeaderUI extends  React.Component {
     );
   }
 }
+
+export const Header = withRouter(
+  connect(
+    state => ({
+      isFilterVisible: state.isFilterVisible
+    })
+  )(HeaderUI)
+);

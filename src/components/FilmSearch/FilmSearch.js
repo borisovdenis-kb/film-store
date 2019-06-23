@@ -1,11 +1,9 @@
 import React from 'react';
 import SearchButton from "../SearchButton/SearchButton";
 import { icons } from "../../constants/icons";
-import { getFilms } from "../../services/FilmApi";
-import {store, toggleFilter, setFilms} from "../../store";
+import { setFilterVisibility } from "../../store";
 import './FilmSearch.css';
 import {connect} from "react-redux";
-import _ from 'lodash';
 
 const classNames = require('classnames');
 
@@ -17,19 +15,6 @@ class FilmSearchUI extends React.Component {
       value: '',
       isFocused: false
     };
-  }
-
-  componentDidMount() {
-    getFilms()
-      .then(result => {
-        store.dispatch(setFilms(result));
-      });
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (!_.isEqual(prevProps.filter, this.props.filter)) {
-      getFilms({params: this.props.filter});
-    }
   }
 
   onChange = (e) => {
@@ -49,7 +34,7 @@ class FilmSearchUI extends React.Component {
   };
 
   toggleFilter = () => {
-    this.props.dispatch(toggleFilter());
+    this.props.dispatch(setFilterVisibility(!this.props.isFilterVisible));
   };
 
   render() {
@@ -77,4 +62,9 @@ class FilmSearchUI extends React.Component {
   }
 }
 
-export const FilmSearch = connect()(FilmSearchUI);
+export const FilmSearch = connect(
+  state => ({
+    filter: state.filter,
+    isFilterVisible: state.isFilterVisible
+  })
+)(FilmSearchUI);

@@ -33,11 +33,7 @@ export default class FilmPage extends React.Component {
 
   loadSimilarFilms = () => {
     const promises = this.state.filmData.genres
-      .map(genre => getFilmByFilter({
-        params: {
-          genres_like: genre
-        }
-      }));
+      .map(genre => getFilmByFilter({genres_like: genre}));
 
     return Promise.all(promises)
       .then(responses => {

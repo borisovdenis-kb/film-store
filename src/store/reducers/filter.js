@@ -1,18 +1,24 @@
-import { TOGGLE_FILTER, SET_FILTER } from "../actions";
+import { SET_FILTER_VISIBILITY, SET_FILTER } from "../actions";
 
 const defaultFilter = {
-  isVisible : false,
-  directors: [],
-  year: null,
-  rating: null
+  director: '',
+  year: '',
+  rating: ''
 };
 
 export const filter = (state = defaultFilter, action) => {
   switch (action.type) {
-    case TOGGLE_FILTER:
-      return {...state, isVisible: !state.isVisible};
     case SET_FILTER:
       return {...state, ...action.filter};
+    default:
+      return state;
+  }
+};
+
+export const isFilterVisible = (state = false, action) => {
+  switch (action.type) {
+    case SET_FILTER_VISIBILITY:
+      return action.isFilterVisible;
     default:
       return state;
   }
