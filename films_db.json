@@ -22,6 +22,18 @@
     "Musical",
     "Sport"
   ],
+  "directors": [
+    {"id": 1, "name": "Christopher Nolan"},
+    {"id": 2, "name": "Quentin Tarantino"},
+    {"id": 3, "name": "Guy Ritchie"},
+    {"id": 4, "name": "Alfred Hitchcock"},
+    {"id": 5, "name": "Martin Scorsese"},
+    {"id": 6, "name": "Stanley Kubrick"},
+    {"id": 7, "name": "Robert Zemeckis"},
+    {"id": 8, "name": "Darren Aronofsky"},
+    {"id": 9, "name": "Peter Jackson"},
+    {"id": 10, "name": "Woody Allen"}
+  ],
   "films": [
     {
       "id": 1,

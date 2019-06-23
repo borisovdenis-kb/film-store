@@ -32,14 +32,14 @@ export class ApiCreator {
    */
   get(url) {
     return (params) => {
-      url = this.getUrlPreparedUrl(url, params);
+      url = this.getPreparedUrl(url, params);
 
       return fetch(url)
         .then(response => response.json());
     };
   }
 
-  getUrlPreparedUrl(url, params) {
+  getPreparedUrl(url, params) {
     let resultUrl = this.setUrlParams(url, params);
     params = _.omit(params, this.getUrlParamNames(url));
 

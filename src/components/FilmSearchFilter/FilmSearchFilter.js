@@ -1,13 +1,26 @@
 import React from 'react';
 import Button from "../primitives/Button/Button";
 import {connect} from 'react-redux';
-import {InputUI} from "../primitives/Input/InputUI";
 import {setFilms, setFilter} from "../../store";
 import './FilmSearchFilter.css';
 import {getFilms} from "../../services/FilmApi";
 import {withRouter} from "react-router-dom";
 import {PeriodUI} from "../primitives/Period/PeriodUI";
 import {store} from "../../store";
+import {SelectUI} from "../primitives/Select/SelectUI";
+
+const directors = [
+  {id: 1, name: 'Christopher Nolan'},
+  {id: 2, name: 'Quentin Tarantino'},
+  {id: 3, name: 'Guy Ritchie'},
+  {id: 4, name: 'Alfred Hitchcock'},
+  {id: 5, name: 'Martin Scorsese'},
+  {id: 6, name: 'Stanley Kubrick'},
+  {id: 7, name: 'Robert Zemeckis'},
+  {id: 8, name: 'Darren Aronofsky'},
+  {id: 9, name: 'Peter Jackson'},
+  {id: 10, name: 'Woody Allen'}
+];
 
 class FilmSearchFilterUI extends React.Component {
   constructor(props) {
@@ -15,7 +28,7 @@ class FilmSearchFilterUI extends React.Component {
 
     this.state = {
       filter: {
-        director: '',
+        director: {},
         rating: {
           start: '',
           end: ''
@@ -25,14 +38,14 @@ class FilmSearchFilterUI extends React.Component {
           end: ''
         }
       }
-    }; // TODO: теперь вопрос как этот правильно синхронизировать со стором
+    };
   }
 
   componentDidMount() {
     this.setState({filter: this.props.filter});
   }
 
-  onInputsChange = ({target}) => {
+  onInputsChange = ({target}) => { // TODO: совместить input и select
     this.setState((state) => {
       return {
         filter: {
@@ -54,6 +67,17 @@ class FilmSearchFilterUI extends React.Component {
     });
   };
 
+  onSelectChange = ({name, value}) => {
+    this.setState((state) => {
+      return {
+        filter: {
+          ...state.filter,
+          [name]: value
+        }
+      };
+    });
+  };
+
   onFilterClick = () => {
     this.props.setFilter(this.state.filter);
 
@@ -64,8 +88,6 @@ class FilmSearchFilterUI extends React.Component {
     const {filter} = store.getState();
     const params = this.mapFilterToParams(filter);
 
-    console.log(params);
-
     getFilms(params)
       .then(result => {
         this.props.setFilms(result);
@@ -75,7 +97,7 @@ class FilmSearchFilterUI extends React.Component {
   }
 
   mapFilterToParams = (filter) => ({
-    director_like: filter.director,
+    director_like: filter.director.name,
     year_gte: filter.year.start,
     year_lte: filter.year.end,
     rating_gte: filter.rating.start,
@@ -102,11 +124,13 @@ class FilmSearchFilterUI extends React.Component {
                       onChange={this.onPeriodsChange}
             />
           </div>
-          <InputUI label="Director"
-                   name="director"
-                   placeholder="Director"
-                   value={this.state.filter.director}
-                   onChange={this.onInputsChange}
+          <SelectUI label="Director"
+                    name="director"
+                    items={directors}
+                    displayKey="name"
+                    trackBy="id"
+                    value={this.state.filter.director}
+                    onChange={this.onSelectChange}
           />
         </div>
         <div className="film-search-filter__button">

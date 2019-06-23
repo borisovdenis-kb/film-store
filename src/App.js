@@ -23,8 +23,8 @@ class AppUI extends React.Component {
           <div className="history-navigator" />
           <div className="content-container">
             <Switch>
-              <Route exact path="/films" component={FilmSearchResult}/>
-              <Route path="/films/:id" component={FilmPage}/>
+              <Route exact path="/films" component={FilmSearchResult} />
+              <Route path="/films/:id" component={FilmPage} />
             </Switch>
           </div>
         </div>
