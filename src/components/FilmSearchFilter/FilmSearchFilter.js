@@ -1,13 +1,20 @@
 import React from 'react';
 import Button from "../primitives/Button/Button";
 import {connect} from 'react-redux';
-import {InputUI} from "../primitives/Input/InputUI";
 import {setFilms, setFilter} from "../../store";
 import './FilmSearchFilter.css';
 import {getFilms} from "../../services/FilmApi";
 import {withRouter} from "react-router-dom";
 import {PeriodUI} from "../primitives/Period/PeriodUI";
 import {store} from "../../store";
+import {SelectUI} from "../primitives/Select/SelectUI";
+
+const directors = [
+  {id: 1, name: 'Denis'},
+  {id: 2, name: 'Denis 2'},
+  {id: 3, name: 'Denis 3'},
+  {id: 4, name: 'Denis 4'}
+];
 
 class FilmSearchFilterUI extends React.Component {
   constructor(props) {
@@ -32,7 +39,7 @@ class FilmSearchFilterUI extends React.Component {
     this.setState({filter: this.props.filter});
   }
 
-  onInputsChange = ({target}) => {
+  onInputsChange = ({target}) => { // TODO: совместить input и select
     this.setState((state) => {
       return {
         filter: {
@@ -49,6 +56,17 @@ class FilmSearchFilterUI extends React.Component {
         filter: {
           ...state.filter,
           [name]: {start, end}
+        }
+      };
+    });
+  };
+
+  onSelectChange = ({name, value}) => {
+    this.setState((state) => {
+      return {
+        filter: {
+          ...state.filter,
+          [name]: value
         }
       };
     });
@@ -102,12 +120,14 @@ class FilmSearchFilterUI extends React.Component {
                       onChange={this.onPeriodsChange}
             />
           </div>
-          <InputUI label="Director"
-                   name="director"
-                   placeholder="Director"
-                   value={this.state.filter.director}
-                   onChange={this.onInputsChange}
-          />
+          {/*<SelectUI label="Director"*/}
+                    {/*name="director"*/}
+                    {/*items={directors}*/}
+                    {/*displayKey="name"*/}
+                    {/*trackBy="id"*/}
+                    {/*value={this.state.filter.director}*/}
+                    {/*onChange={this.onSelectChange}*/}
+          {/*/>*/}
         </div>
         <div className="film-search-filter__button">
           <Button title="Search" width="75" height="30" onClick={this.onFilterClick}/>
