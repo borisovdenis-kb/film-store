@@ -80,7 +80,7 @@ class FilmSearchFilterUI extends React.Component {
     const {filter} = store.getState();
     const params = this.mapFilterToParams(filter);
 
-    this.props.dispatch(loadFilms(params)).then(() => {
+    this.props.loadFilms(params).then(() => {
       this.props.history.push('/films');
     });
   }
@@ -138,10 +138,9 @@ export const FilmSearchFilter = withRouter(
   connect(
     (state) => ({
       filter: state.filter
-    }),
-    (dispatch) => ({
-      setFilter: (filter) => dispatch(setFilter(filter)),
-      dispatch: (action) => dispatch(action)
-    })
+    }), {
+      setFilter,
+      loadFilms
+    }
   )(FilmSearchFilterUI)
 );
