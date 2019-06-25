@@ -1,8 +1,8 @@
-import {SET_FILMS} from "../actions";
+import * as types from '../../constants/actionTypes';
 
 export const films = (state = [], action) => {
   switch (action.type) {
-    case SET_FILMS:
+    case types.SET_FILMS:
       return action.films;
     default:
       return state;

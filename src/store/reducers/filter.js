@@ -1,4 +1,4 @@
-import { SET_FILTER_VISIBILITY, SET_FILTER } from "../actions";
+import * as types from '../../constants/actionTypes';
 
 const defaultFilter = {
   director: '',
@@ -14,7 +14,7 @@ const defaultFilter = {
 
 export const filter = (state = defaultFilter, action) => {
   switch (action.type) {
-    case SET_FILTER:
+    case types.SET_FILTER:
       return {...state, ...action.filter};
     default:
       return state;
@@ -23,7 +23,7 @@ export const filter = (state = defaultFilter, action) => {
 
 export const isFilterVisible = (state = false, action) => {
   switch (action.type) {
-    case SET_FILTER_VISIBILITY:
+    case types.SET_FILTER_VISIBILITY:
       return action.isFilterVisible;
     default:
       return state;
