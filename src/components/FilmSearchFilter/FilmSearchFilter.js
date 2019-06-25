@@ -1,9 +1,8 @@
 import React from 'react';
 import Button from "../primitives/Button/Button";
 import {connect} from 'react-redux';
-import {setFilms, setFilter} from "../../store";
+import {loadFilms, setFilter} from "../../store";
 import './FilmSearchFilter.css';
-import {getFilms} from "../../services/FilmApi";
 import {getDirectors} from "../../services/DirectorApi";
 import {withRouter} from "react-router-dom";
 import {PeriodUI} from "../primitives/Period/PeriodUI";
@@ -81,12 +80,9 @@ class FilmSearchFilterUI extends React.Component {
     const {filter} = store.getState();
     const params = this.mapFilterToParams(filter);
 
-    getFilms(params)
-      .then(result => {
-        this.props.setFilms(result);
-
-        this.props.history.push('/films');
-      });
+    this.props.dispatch(loadFilms(params)).then(() => {
+      this.props.history.push('/films');
+    });
   }
 
   loadDirectors = () => {
@@ -144,8 +140,8 @@ export const FilmSearchFilter = withRouter(
       filter: state.filter
     }),
     (dispatch) => ({
-      setFilms: (films) => dispatch(setFilms(films)),
-      setFilter: (filter) => dispatch(setFilter(filter))
+      setFilter: (filter) => dispatch(setFilter(filter)),
+      dispatch: (action) => dispatch(action)
     })
   )(FilmSearchFilterUI)
 );

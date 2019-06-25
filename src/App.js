@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {setFilterVisibility} from "./store";
 import {Home} from "./components/Home/Home";
 import './App.css';
+import {GlobalLoader} from "./components/GlobalLoader/GlobalLoader";
 
 class AppUI extends React.Component {
 
@@ -17,6 +18,7 @@ class AppUI extends React.Component {
   render() {
     return (
       <div className="App">
+        {this.props.isLoading && <GlobalLoader />}
         <Header />
         <Route exact path="/" component={Home}/>
         <div onClick={this.onClick}>
@@ -33,4 +35,8 @@ class AppUI extends React.Component {
   }
 }
 
-export const App = connect()(AppUI);
+export const App = connect(
+  (state) => ({
+    isLoading: state.isLoading > 0
+  })
+)(AppUI);
