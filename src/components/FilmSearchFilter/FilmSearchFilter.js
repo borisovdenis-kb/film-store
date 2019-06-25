@@ -4,29 +4,18 @@ import {connect} from 'react-redux';
 import {setFilms, setFilter} from "../../store";
 import './FilmSearchFilter.css';
 import {getFilms} from "../../services/FilmApi";
+import {getDirectors} from "../../services/DirectorApi";
 import {withRouter} from "react-router-dom";
 import {PeriodUI} from "../primitives/Period/PeriodUI";
 import {store} from "../../store";
 import {SelectUI} from "../primitives/Select/SelectUI";
-
-const directors = [
-  {id: 1, name: 'Christopher Nolan'},
-  {id: 2, name: 'Quentin Tarantino'},
-  {id: 3, name: 'Guy Ritchie'},
-  {id: 4, name: 'Alfred Hitchcock'},
-  {id: 5, name: 'Martin Scorsese'},
-  {id: 6, name: 'Stanley Kubrick'},
-  {id: 7, name: 'Robert Zemeckis'},
-  {id: 8, name: 'Darren Aronofsky'},
-  {id: 9, name: 'Peter Jackson'},
-  {id: 10, name: 'Woody Allen'}
-];
 
 class FilmSearchFilterUI extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      directors: [],
       filter: {
         director: {},
         rating: {
@@ -42,12 +31,14 @@ class FilmSearchFilterUI extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({filter: this.props.filter});
+    this.loadDirectors()
+      .then(directors => this.setState({directors, filter: this.props.filter}));
   }
 
   onInputsChange = ({target}) => { // TODO: совместить input и select
     this.setState((state) => {
       return {
+        ...state,
         filter: {
           ...state.filter,
           [target.name]: target.value
@@ -59,6 +50,7 @@ class FilmSearchFilterUI extends React.Component {
   onPeriodsChange = ({name, start, end}) => {
     this.setState((state) => {
       return {
+        ...state,
         filter: {
           ...state.filter,
           [name]: {start, end}
@@ -70,6 +62,7 @@ class FilmSearchFilterUI extends React.Component {
   onSelectChange = ({name, value}) => {
     this.setState((state) => {
       return {
+        ...state,
         filter: {
           ...state.filter,
           [name]: value
@@ -95,6 +88,10 @@ class FilmSearchFilterUI extends React.Component {
         this.props.history.push('/films');
       });
   }
+
+  loadDirectors = () => {
+    return getDirectors();
+  };
 
   mapFilterToParams = (filter) => ({
     director_like: filter.director.name,
@@ -126,7 +123,7 @@ class FilmSearchFilterUI extends React.Component {
           </div>
           <SelectUI label="Director"
                     name="director"
-                    items={directors}
+                    items={this.state.directors}
                     displayKey="name"
                     trackBy="id"
                     value={this.state.filter.director}
