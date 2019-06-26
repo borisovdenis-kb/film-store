@@ -1,6 +1,7 @@
 import React from 'react';
 import './FilmPreview.css';
 import FilmPoster from '../FilmPoster/FilmPoster';
+import {FilmShortInfo} from "../FilmShortInfo/FilmShortInfo";
 
 export default class FilmPreview extends React.Component {
   openFilmPage = () => {
@@ -13,12 +14,7 @@ export default class FilmPreview extends React.Component {
         <div className="film-card__poster">
           <FilmPoster posterUrl={this.props.posterUrl} onClick={this.openFilmPage}/>
         </div>
-        <div className="film-card__short-info">
-          <div className="film-card__title">{this.props.title}</div>
-          <div className="film-card__extra-info">
-            {this.props.year}, {this.props.genres[0]}
-          </div>
-        </div>
+        <FilmShortInfo {...this.props} />
       </div>
     );
   }

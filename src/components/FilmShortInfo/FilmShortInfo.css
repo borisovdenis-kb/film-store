@@ -1,0 +1,21 @@
+.film-short-info {
+    margin-top: 5px;
+    color: #b4b4b4;
+}
+
+.film-short-info--focused {
+    color: #ffffff;
+}
+
+.film-short-info__title {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-weight: 600;
+    text-align: left;
+}
+
+.film-short-info__extra-info {
+    display: flex;
+    justify-content: flex-start;
+}

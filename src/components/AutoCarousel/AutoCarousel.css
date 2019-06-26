@@ -1,0 +1,52 @@
+.auto-carousel {
+    display: flex;
+    position: relative;
+}
+
+.auto-carousel__progress {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.auto-carousel__progress-bottom {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: rgba(54, 54, 54, 0.51);
+}
+
+.auto-carousel__progress-item {
+    width: 150px;
+}
+
+.auto-carousel__progress-bar-container {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: rgba(185,185,185,0.51);
+}
+
+.auto-carousel__progress-bar {
+    position: absolute;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    transition: width 0.1s linear;
+}
+
+.auto-carousel__items-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.auto-carousel__items-container--movable {
+    display: flex;
+    transition: 0.5s ease-in-out;
+}
