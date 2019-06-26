@@ -18,7 +18,8 @@
     width: 100%;
     padding: 20px;
     justify-content: space-between;
-    background-color: rgba(54, 54, 54, 0.51);
+    background-color: rgba(0, 0, 0, 0.54);
+
 }
 
 .auto-carousel__progress-item {
@@ -35,8 +36,12 @@
 .auto-carousel__progress-bar {
     position: absolute;
     height: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(225, 225, 225, 0.86);
     transition: width 0.1s linear;
+}
+
+.auto-carousel__progress-bar--focused {
+    background-color: #ffffff;
 }
 
 .auto-carousel__items-container {

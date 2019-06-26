@@ -35,7 +35,7 @@ const films = [
     year: 1980,
     genres: ["Drama", "Horror"],
     director: ["Stanley Kubrick"],
-    posterUrl: "https://cdn.wallpapersafari.com/13/60/qmPAjL.jpg"
+    posterUrl: "https://content.propstore.com/auction/la2018/listings/82093/img14.jpg"
   },
   {
     id: 71,
