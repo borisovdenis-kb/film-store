@@ -1,8 +1,10 @@
 .header {
+    position: fixed;
     display: flex;
     flex-direction: column;
     width: 100%;
     background-color: #282c34;
+    z-index: 300;
 }
 
 .header__search-container {

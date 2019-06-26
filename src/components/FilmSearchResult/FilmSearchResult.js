@@ -3,6 +3,7 @@ import FilmPreview from '../FilmPreview/FilmPreview';
 import './FilmSearchResult.css';
 import { connect } from 'react-redux';
 import _ from "lodash";
+import {loadFilms} from "../../store";
 import {AutoCarousel} from "../AutoCarousel/AutoCarousel";
 
 const films = [
@@ -52,11 +53,17 @@ class FilmSearchResultUI extends React.Component {
     this.props.history.push(`/films/${filmId}`);
   };
 
+  componentDidMount() {
+    if (!this.props.films.length) {
+      this.props.dispatch(loadFilms());
+    }
+  }
+
   render() {
     return (
       <div className="film-search-result">
-        <AutoCarousel items={films} width={1060} height={430}/>
-        <div>
+        <AutoCarousel items={films} width={1060} height={420}/>
+        <div className="film-search-result__content">
           {this.props.films.map((row, index) => (
             <div className="film-search-result__row" key={index}>
               {row.map(film => (

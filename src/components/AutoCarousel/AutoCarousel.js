@@ -10,7 +10,7 @@ function ProgressItem({item, width, isFocused}) {
   });
 
   return (
-    <div className="auto-carousel__progress-item" key={item.id}>
+    <div className="auto-carousel__progress-item">
       <div className="auto-carousel__progress-bar-container">
         <div className={progressBarClasses} style={{width: width}} />
       </div>
@@ -109,6 +109,7 @@ export class AutoCarousel extends React.Component {
               <ProgressItem item={item}
                             width={itemsProgressBars[index]}
                             isFocused={offsetIndex === index}
+                            key={item.id}
               />
             ))}
           </div>

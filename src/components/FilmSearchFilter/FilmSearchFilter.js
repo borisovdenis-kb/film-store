@@ -34,19 +34,7 @@ class FilmSearchFilterUI extends React.Component {
       .then(directors => this.setState({directors, filter: this.props.filter}));
   }
 
-  onInputsChange = ({target}) => { // TODO: совместить input и select
-    this.setState((state) => {
-      return {
-        ...state,
-        filter: {
-          ...state.filter,
-          [target.name]: target.value
-        }
-      };
-    });
-  };
-
-  onPeriodsChange = ({name, start, end}) => {
+  onPeriodsChange = ({name, start, end}) => { // TODO: Привести к одному интерфейсу компоненты форм
     this.setState((state) => {
       return {
         ...state,
@@ -77,10 +65,7 @@ class FilmSearchFilterUI extends React.Component {
   };
 
   applyFilter() {
-    const {filter} = store.getState();
-    const params = this.mapFilterToParams(filter);
-
-    this.props.loadFilms(params).then(() => {
+    this.props.loadFilms().then(() => {
       this.props.history.push('/films');
     });
   }
@@ -88,14 +73,6 @@ class FilmSearchFilterUI extends React.Component {
   loadDirectors = () => {
     return getDirectors();
   };
-
-  mapFilterToParams = (filter) => ({
-    director_like: filter.director.name,
-    year_gte: filter.year.start,
-    year_lte: filter.year.end,
-    rating_gte: filter.rating.start,
-    rating_lte: filter.rating.end
-  });
 
   render() {
     return (

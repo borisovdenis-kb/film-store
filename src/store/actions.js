@@ -11,8 +11,18 @@ export const setFilter = filter => ({
   filter
 });
 
-export const loadFilms = (params) => {
-  return (dispatch) => {
+const mapFilterToParams = (filter) => ({
+  director_like: filter.director.name,
+  year_gte: filter.year.start,
+  year_lte: filter.year.end,
+  rating_gte: filter.rating.start,
+  rating_lte: filter.rating.end
+});
+
+export const loadFilms = () => {
+  return (dispatch, getState) => {
+    const params = mapFilterToParams(getState().filter);
+
     dispatch(increaseLoading());
 
     return getFilms(params)

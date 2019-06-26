@@ -1,6 +1,10 @@
 .film-search-result {
     width: 1060px;
     height: 100%;
+    margin-top: 50px;
+}
+
+.film-search-result__content {
     padding-top: 20px;
 }
 

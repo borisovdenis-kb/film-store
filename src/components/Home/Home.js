@@ -1,11 +1,10 @@
 import React from 'react';
-import {setFilterVisibility} from "../../store";
-import {connect} from "react-redux";
+import {withRouter} from "react-router";
 import './Home.css';
 
 function HomeUI(props) {
   const openFilter = () => {
-    props.dispatch(setFilterVisibility(true));
+    props.history.push('/films');
   };
 
   return (
@@ -17,8 +16,4 @@ function HomeUI(props) {
   );
 }
 
-export const Home = connect(
-  (state) => ({
-    isFilterVisible: state.isFilterVisible
-  })
-)(HomeUI);
+export const Home = withRouter(HomeUI);

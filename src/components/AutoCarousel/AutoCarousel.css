@@ -24,6 +24,7 @@
 
 .auto-carousel__progress-item {
     width: 150px;
+    cursor: pointer;
 }
 
 .auto-carousel__progress-bar-container {
