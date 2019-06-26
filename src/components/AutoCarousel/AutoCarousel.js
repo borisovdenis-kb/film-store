@@ -35,12 +35,10 @@ export class AutoCarousel extends React.Component {
   }
 
   componentDidMount() {
-    this.intervalsIds.next = setInterval(this.next, 10000);
     this.intervalsIds.updateProgressBars = setInterval(this.updateProgressBars, 100);
+    this.intervalsIds.next = setInterval(this.next, 10000);
 
-    this.setState({
-      itemsProgressBars: this.props.items.map(item => 0)
-    });
+    this.resetProgressBars();
   }
 
   componentWillUnmount() {
