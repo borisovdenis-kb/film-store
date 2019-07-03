@@ -31,11 +31,11 @@ export class ApiCreator {
    * @returns {function(*=): Promise<any | never>}
    */
   get(url) {
-    return (params) => {
+    return async (params) => {
       url = this.getPreparedUrl(url, params);
+      const response = await fetch(url);
 
-      return fetch(url)
-        .then(response => response.json());
+      return await response.json();
     };
   }
 
