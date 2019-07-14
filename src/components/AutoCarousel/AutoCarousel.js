@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import './AutoCarousel.css';
 import {FilmShortInfo} from "../FilmShortInfo/FilmShortInfo";
+import PropTypes from 'prop-types';
+import './AutoCarousel.css';
 
 function ProgressItem({item, width, isFocused}) {
   const progressBarClasses = classNames({
@@ -19,7 +20,7 @@ function ProgressItem({item, width, isFocused}) {
   );
 }
 
-export class AutoCarousel extends React.Component {
+export class AutoCarousel extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -87,8 +88,8 @@ export class AutoCarousel extends React.Component {
     const {itemsProgressBars, offsetIndex} = this.state;
 
     const sizeStyle = {
-      width: `${width || 200}px`,
-      height: `${height || 100}px`
+      width: width,
+      height: height
     };
 
     const getItemStyle = (url) => ({
@@ -124,3 +125,14 @@ export class AutoCarousel extends React.Component {
     );
   }
 }
+
+AutoCarousel.defaultProps = {
+  width: '200px',
+  height: '200px'
+};
+
+AutoCarousel.propTypes = {
+  items: PropTypes.array.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string
+};

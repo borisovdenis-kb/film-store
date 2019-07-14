@@ -1,19 +1,16 @@
 .film-search-result {
-    width: 1060px;
+    max-width: 1060px;
     height: 100%;
     margin-top: 50px;
 }
 
 .film-search-result__content {
+    display: flex;
+    flex-wrap: wrap;
     padding-top: 20px;
 }
 
-.film-search-result__row {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-}
-
 .film-search-result__card-container {
-    margin-right: 20px;
+    margin-right: 16px;
+    margin-bottom: 20px;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import FilmPreview from '../FilmPreview/FilmPreview';
 import './FilmSearchResult.css';
 import { connect } from 'react-redux';
-import _ from "lodash";
 import {loadFilms} from "../../store";
 import {AutoCarousel} from "../AutoCarousel/AutoCarousel";
 
@@ -62,15 +61,11 @@ class FilmSearchResultUI extends React.Component {
   render() {
     return (
       <div className="film-search-result">
-        <AutoCarousel items={films} width={1060} height={420}/>
+        <AutoCarousel items={films} width="1060px" height="420px" />
         <div className="film-search-result__content">
-          {this.props.films.map((row, index) => (
-            <div className="film-search-result__row" key={index}>
-              {row.map(film => (
-                <div className="film-search-result__card-container" key={film.id}>
-                  <FilmPreview {...film} onClick={this.openFilmPage}/>
-                </div>
-              ))}
+          {this.props.films.map(film => (
+            <div className="film-search-result__card-container" key={film.id}>
+              <FilmPreview film={film} onClick={this.openFilmPage} />
             </div>
           ))}
         </div>
@@ -81,6 +76,6 @@ class FilmSearchResultUI extends React.Component {
 
 export const FilmSearchResult = connect(
   (state) => ({
-      films: _.chunk(state.films, 6)
+      films: state.films
   })
 )(FilmSearchResultUI);

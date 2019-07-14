@@ -76,7 +76,7 @@ export default class FilmPage extends React.Component {
 
         <div className="film-page__description-container">
           <div className="film-page__poster-container">
-            <FilmPoster posterUrl={this.state.filmData.posterUrl} width="280" height="405"/>
+            <FilmPoster posterUrl={this.state.filmData.posterUrl} width="280px" height="405px"/>
             <div className="film-page__sale-block">
               <Button title="Buy" />
             </div>
@@ -102,7 +102,7 @@ export default class FilmPage extends React.Component {
             <Carousel itemWidth="180" itemHeight="270" visibleAmount={5}>
               {this.state.similarFilms.map(film => (
                 <div className="film-page__film-preview-container" key={film.id}>
-                  <FilmPreview {...film} onClick={this.openFilmPage}/>
+                  <FilmPreview film={film} onClick={this.openFilmPage}/>
                 </div>
               ))}
             </Carousel>
