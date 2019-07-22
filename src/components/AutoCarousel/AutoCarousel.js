@@ -26,7 +26,7 @@ export class AutoCarousel extends React.PureComponent {
 
     this.state = {
       offsetIndex: 0,
-      itemsProgressBars: []
+      progressItems: []
     };
 
     this.intervalsIds = {
@@ -61,7 +61,7 @@ export class AutoCarousel extends React.PureComponent {
 
   updateProgressBars = () => {
     this.setState(state => ({
-      itemsProgressBars: state.itemsProgressBars.map((item, index) => {
+      progressItems: state.progressItems.map((item, index) => {
         if (index === state.offsetIndex) {
           return item + (150 / 100);
         }
@@ -73,7 +73,7 @@ export class AutoCarousel extends React.PureComponent {
 
   resetProgressBars = () => {
     this.setState({
-      itemsProgressBars: this.props.items.map(item => 0)
+      progressItems: this.props.items.map(item => 0)
     });
   };
 
@@ -85,7 +85,7 @@ export class AutoCarousel extends React.PureComponent {
 
   render() {
     const {width, height} = this.props;
-    const {itemsProgressBars, offsetIndex} = this.state;
+    const {progressItems, offsetIndex} = this.state;
 
     const sizeStyle = {
       width: width,
@@ -106,7 +106,7 @@ export class AutoCarousel extends React.PureComponent {
           <div className="auto-carousel__progress-bottom">
             {this.props.items.map((item, index) => (
               <ProgressItem item={item}
-                            width={itemsProgressBars[index]}
+                            width={progressItems[index]}
                             isFocused={offsetIndex === index}
                             key={item.id}
               />

@@ -1,9 +1,14 @@
 import * as types from '../constants/actionTypes';
-import { getFilms } from "../services/FilmApi";
+import { getFilms, getFilmsOfTheDay } from "../services/FilmApi";
 
 export const setFilms = films => ({
   type: types.SET_FILMS,
   films
+});
+
+export const setFilmsOfTheDay = filmsOfTheDay => ({
+  type: types.SET_FILMS_OF_THE_DAY,
+  filmsOfTheDay
 });
 
 export const setFilter = filter => ({
@@ -27,6 +32,16 @@ export const loadFilms = () => {
 
     return getFilms(params)
       .then(films => dispatch(setFilms(films)))
+      .finally(() => dispatch(decreaseLoading()));
+  }
+};
+
+export const loadFilmsOfTheDay = () => {
+  return (dispatch) => {
+    dispatch(increaseLoading());
+
+    return getFilmsOfTheDay()
+      .then(filmsOfTheDay => dispatch(setFilmsOfTheDay(filmsOfTheDay)))
       .finally(() => dispatch(decreaseLoading()));
   }
 };

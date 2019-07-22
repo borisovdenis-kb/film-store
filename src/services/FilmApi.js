@@ -14,8 +14,13 @@ const getFilmByFilter = (params = {}) => {
   return apiCreator.get('/films')(params);
 };
 
+const getFilmsOfTheDay = (params = {}) => {
+  return apiCreator.get('/filmsOfTheDay')(params);
+};
+
 export {
   getFilms,
   getFilmById,
-  getFilmByFilter
+  getFilmByFilter,
+  getFilmsOfTheDay
 };
