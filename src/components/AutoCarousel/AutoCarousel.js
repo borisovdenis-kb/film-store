@@ -1,8 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import {FilmShortInfo} from "../FilmShortInfo/FilmShortInfo";
+import { FilmShortInfo } from "../FilmShortInfo/FilmShortInfo";
+import { animate, timing } from "../../services/animation";
 import PropTypes from 'prop-types';
 import './AutoCarousel.css';
+
+const ANIMATION_DURATION = 10000;
+const PROGRESS_ITEMS_COUNT = 5;
 
 function ProgressItem({item, width, isFocused}) {
   const progressBarClasses = classNames({
@@ -25,27 +29,26 @@ export class AutoCarousel extends React.PureComponent {
     super(props);
 
     this.state = {
-      offsetIndex: 0,
+      offsetIndex: PROGRESS_ITEMS_COUNT - 1,
       progressItems: []
-    };
-
-    this.intervalsIds = {
-      next: null,
-      updateProgressBars: null
     };
   }
 
   componentDidMount() {
-    this.intervalsIds.updateProgressBars = setInterval(this.updateProgressBars, 100);
-    this.intervalsIds.next = setInterval(this.next, 10000);
+    animate({ // TODO: возможно будет баг если мы закроем этот компонент у нас будет бесконечная анимация
+      duration: ANIMATION_DURATION * PROGRESS_ITEMS_COUNT,
+      timingFn: timing.linear,
+      animationFn: this.next,
+      isInfinite: true,
+      steps: PROGRESS_ITEMS_COUNT
+    });
 
     this.resetProgressBars();
   }
 
-  componentWillUnmount() {
-    clearInterval(this.intervalsIds.next);
-    clearInterval(this.intervalsIds.updateProgressBars);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.nextItervalId);
+  // }
 
   next = () => {
     const itemsLength = this.props.items.length;
@@ -57,13 +60,19 @@ export class AutoCarousel extends React.PureComponent {
     if (this.state.offsetIndex === 0) {
       this.resetProgressBars();
     }
+
+    // animate({
+    //   duration: ANIMATION_DURATION,
+    //   timingFn: timing.linear,
+    //   animationFn: this.updateProgressItems
+    // });
   };
 
-  updateProgressBars = () => {
+  updateProgressItems = (progress) => {
     this.setState(state => ({
       progressItems: state.progressItems.map((item, index) => {
         if (index === state.offsetIndex) {
-          return item + (150 / 100);
+          return progress * (150 / 100);
         }
 
         return item;
