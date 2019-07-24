@@ -38,7 +38,27 @@
     position: absolute;
     height: 100%;
     background-color: rgba(225, 225, 225, 0.86);
-    transition: width 0.1s linear;
+}
+
+.auto-carousel__progress-bar-animation {
+    animation-name: progress;
+    animation-timing-function: linear;
+    animation-duration: 10s;
+}
+
+.auto-carousel__progress-bar--completed {
+    width: 100%;
+    background-color: rgba(225, 225, 225, 0.86);
+}
+
+@keyframes progress {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 .auto-carousel__progress-bar--focused {

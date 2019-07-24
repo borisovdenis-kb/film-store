@@ -8,21 +8,23 @@ import './AutoCarousel.css';
 const ANIMATION_DURATION = 10000;
 const PROGRESS_ITEMS_COUNT = 5;
 
-function ProgressItem({item, width, isFocused}) {
+const ProgressItem = React.memo(function ProgressItem({item, isFocused, carouselIndex, itemIndex}) {
   const progressBarClasses = classNames({
     'auto-carousel__progress-bar': true,
+    'auto-carousel__progress-bar-animation': itemIndex === carouselIndex,
+    'auto-carousel__progress-bar--completed': itemIndex < carouselIndex,
     'auto-carousel__progress-bar--focused': isFocused
   });
 
   return (
     <div className="auto-carousel__progress-item">
       <div className="auto-carousel__progress-bar-container">
-        <div className={progressBarClasses} style={{width: width}} />
+        <div className={progressBarClasses} />
       </div>
       <FilmShortInfo {...item} isFocused={isFocused}/>
     </div>
   );
-}
+});
 
 export class AutoCarousel extends React.PureComponent {
   constructor(props) {
@@ -30,8 +32,8 @@ export class AutoCarousel extends React.PureComponent {
 
     this.state = {
       offsetIndex: PROGRESS_ITEMS_COUNT - 1,
-      progressItems: []
     };
+    this.widthNumber = props.width.match(/\d+/)[0];
   }
 
   componentDidMount() {
@@ -42,13 +44,7 @@ export class AutoCarousel extends React.PureComponent {
       isInfinite: true,
       steps: PROGRESS_ITEMS_COUNT
     });
-
-    this.resetProgressBars();
   }
-
-  // componentWillUnmount() {
-  //   clearInterval(this.nextItervalId);
-  // }
 
   next = () => {
     const itemsLength = this.props.items.length;
@@ -56,45 +52,17 @@ export class AutoCarousel extends React.PureComponent {
     this.setState(state => ({
       offsetIndex: (state.offsetIndex + 1) % itemsLength
     }));
-
-    if (this.state.offsetIndex === 0) {
-      this.resetProgressBars();
-    }
-
-    // animate({
-    //   duration: ANIMATION_DURATION,
-    //   timingFn: timing.linear,
-    //   animationFn: this.updateProgressItems
-    // });
-  };
-
-  updateProgressItems = (progress) => {
-    this.setState(state => ({
-      progressItems: state.progressItems.map((item, index) => {
-        if (index === state.offsetIndex) {
-          return progress * (150 / 100);
-        }
-
-        return item;
-      })
-    }));
-  };
-
-  resetProgressBars = () => {
-    this.setState({
-      progressItems: this.props.items.map(item => 0)
-    });
   };
 
   getTranslateStyle = () => {
     return {
-      transform: `translateX(-${this.props.width * this.state.offsetIndex}px)`
+      transform: `translateX(-${this.widthNumber * this.state.offsetIndex}px)`
     };
   };
 
   render() {
     const {width, height} = this.props;
-    const {progressItems, offsetIndex} = this.state;
+    const {offsetIndex} = this.state;
 
     const sizeStyle = {
       width: width,
@@ -115,7 +83,8 @@ export class AutoCarousel extends React.PureComponent {
           <div className="auto-carousel__progress-bottom">
             {this.props.items.map((item, index) => (
               <ProgressItem item={item}
-                            width={progressItems[index]}
+                            itemIndex={index}
+                            carouselIndex={this.state.offsetIndex}
                             isFocused={offsetIndex === index}
                             key={item.id}
               />

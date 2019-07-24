@@ -26,7 +26,6 @@ export const animate = ({
 
   const isStepPassed = () => {
     if (steps === undefined || (timePassed === 0 && lastTime === 0)) {
-      console.log('hey hey', `timePassed === ${timePassed} && lastTime === ${lastTime}`);
       return true;
     }
 
@@ -44,11 +43,8 @@ export const animate = ({
 
     progress = timingFn(timeProgress);
 
-    console.log(`timePassed: ${timePassed}, timeProgress: ${timeProgress}, lastTime: ${lastTime}, progress: ${progress} progressStep: ${progressStep}`);
-
     if (timePassed <= duration) {
       if (stepPassed) {
-        console.log('+ step passed');
         lastTime = timePassed;
         animationFn(progress);
         requestAnimationFrame(runAnimation);
